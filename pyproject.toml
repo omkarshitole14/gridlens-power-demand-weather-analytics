@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridlens"
+version = "0.1.0"
+description = "Reproducible electricity demand and weather analytics"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2,<3.0",
+  "numpy>=1.26,<3.0",
+  "matplotlib>=3.8,<4.0",
+  "seaborn>=0.13,<1.0",
+  "requests>=2.31,<3.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

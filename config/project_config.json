@@ -1,0 +1,10 @@
+{
+  "country": "DE",
+  "timezone": "Europe/Berlin",
+  "electricity_url": "https://data.open-power-system-data.org/time_series/2020-10-06/time_series_60min_singleindex.csv",
+  "weather_url": "https://data.open-power-system-data.org/weather_data/2020-09-16/weather_data.csv",
+  "electricity_filename": "time_series_60min_singleindex.csv",
+  "weather_filename": "weather_data.csv",
+  "output_csv": "data/processed/gridlens_hourly.csv",
+  "database_path": "data/processed/gridlens.sqlite"
+}

@@ -1,0 +1,1 @@
+Notebooks are intended for guided exploration after the source data has been downloaded and prepared. The reproducible, testable transformations live in `src/gridlens/` and `scripts/`; avoid duplicating production logic in notebook cells.

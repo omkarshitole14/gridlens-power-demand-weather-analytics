@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+
+# Local data and generated outputs
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+reports/data_quality.json
+reports/summary_metrics.json
+reports/figures/*.png
+
+# Notebook local state
+.ipynb_checkpoints/
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+
+# Generated package metadata
+src/*.egg-info/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local database files
+*.sqlite
+*.sqlite3
+*.db
