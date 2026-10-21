@@ -4,14 +4,28 @@ import requests
 
 from gridlens.config import ROOT, load_config, ensure_project_dirs
 
+def has_expected_schema(path: Path, required_columns: set[str]) -> bool:
+    import pandas as pd
 
-def download(url: str, destination: Path) -> None:
+    try:
+        columns = set(pd.read_csv(path, nrows=0).columns)
+        return required_columns.issubset(columns)
+    except (OSError, ValueError, pd.errors.ParserError):
+        return False
+def download(
+    url: str,
+    destination: Path,
+    required_columns: set[str],
+) -> None:
     if destination.exists() and destination.stat().st_size > 0:
-        print(
-            f"Already downloaded: {destination} "
-            f"({destination.stat().st_size:,} bytes)"
-        )
-        return
+        if has_expected_schema(destination, required_columns):
+            print(
+                f"Already downloaded and validated: {destination} "
+                f"({destination.stat().st_size:,} bytes)"
+            )
+            return
+
+        print(f"Existing file has an invalid schema; downloading again: {destination}")
 
     destination.parent.mkdir(parents=True, exist_ok=True)
     temporary_file = destination.with_name(destination.name + ".part")
@@ -46,12 +60,20 @@ def main() -> None:
     download(
         config["electricity_url"],
         ROOT / "data/raw" / config["electricity_filename"],
+        {
+            "utc_timestamp",
+            f"{config['country']}_load_actual_entsoe_transparency",
+        },
     )
+
     download(
         config["weather_url"],
         ROOT / "data/raw" / config["weather_filename"],
+        {
+            "utc_timestamp",
+            f"{config['country']}_temperature",
+        },
     )
-
 
 if __name__ == "__main__":
     main()
