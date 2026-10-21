@@ -5,7 +5,9 @@ from gridlens.config import ROOT, load_config, ensure_project_dirs
 from gridlens.data_quality import quality_report, validate_hourly_table
 from gridlens.features import add_time_features
 from gridlens.database import write_database
-
+def count_invalid_timestamps(timestamps: pd.Series) -> int:
+    """Count timestamps that could not be parsed."""
+    return int(timestamps.isna().sum())
 
 def find_load_column(columns: list[str], country: str) -> str:
     # Use Germany-wide actual demand, not individual transmission operators.
@@ -39,6 +41,12 @@ def main() -> None:
     weather = pd.read_csv(weather_path, usecols=["utc_timestamp", weather_column], low_memory=False)
     electricity["timestamp_utc"] = pd.to_datetime(electricity["utc_timestamp"], utc=True, errors="coerce")
     weather["timestamp_utc"] = pd.to_datetime(weather["utc_timestamp"], utc=True, errors="coerce")
+    electricity_invalid_timestamps = count_invalid_timestamps(
+        electricity["timestamp_utc"]
+    )
+    weather_invalid_timestamps = count_invalid_timestamps(
+        weather["timestamp_utc"]
+    )
     electricity["demand_mw"] = pd.to_numeric(electricity[load_column], errors="coerce")
     weather["temperature_c"] = pd.to_numeric(weather[weather_column], errors="coerce")
     electricity = electricity[["timestamp_utc", "demand_mw"]].dropna(subset=["timestamp_utc"])
@@ -60,8 +68,21 @@ def main() -> None:
     database_path = ROOT / config["database_path"]
     write_database(merged, database_path)
     report = quality_report(merged)
-    report.update({"source_load_column": load_column, "source_weather_column": weather_column, "weather_matched_rows": matched, "weather_match_rate": None if len(merged) == 0 else matched / len(merged), "source_electricity_file": electricity_path.name, "source_weather_file": weather_path.name})
-    (ROOT / "reports/data_quality.json").write_text(json.dumps(report, indent=2), encoding="utf-8")
+    report.update({
+        "source_load_column": load_column,
+        "source_weather_column": weather_column,
+        "source_electricity_file": electricity_path.name,
+        "source_weather_file": weather_path.name,
+        "electricity_invalid_timestamps": electricity_invalid_timestamps,
+        "weather_invalid_timestamps": weather_invalid_timestamps,
+        "weather_matched_rows": matched,
+        "weather_match_rate": None if len(merged) == 0 else matched / len(merged),
+    })
+
+    (ROOT / "reports/data_quality.json").write_text(
+        json.dumps(report, indent=2),
+        encoding="utf-8",
+    )
     print(f"Prepared {len(merged):,} rows -> {output_csv}")
     print(f"SQLite database -> {database_path}")
     print(f"Weather match rate: {report['weather_match_rate']:.1%}" if report["weather_match_rate"] is not None else "No rows to match")

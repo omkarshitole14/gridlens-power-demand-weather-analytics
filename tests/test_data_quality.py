@@ -1,6 +1,7 @@
 import pandas as pd
 import pytest
 from gridlens.data_quality import quality_report, validate_hourly_table
+from scripts.prepare_data import count_invalid_timestamps
 
 def test_quality_report_counts_missing_and_duplicates():
     df = pd.DataFrame({"timestamp_utc": ["2020-01-01T00:00:00Z", "2020-01-01T00:00:00Z", "bad"], "x": [1, None, 3]})
@@ -21,3 +22,14 @@ def test_validate_allows_missing_weather_but_not_negative_demand():
     valid.loc[0, "demand_mw"] = -1
     with pytest.raises(ValueError, match="negative"):
         validate_hourly_table(valid)
+
+def test_count_invalid_timestamps():
+    timestamps = pd.Series(
+        pd.to_datetime(
+            ["2020-01-01T00:00:00Z", "bad", None],
+            utc=True,
+            errors="coerce",
+        )
+    )
+
+    assert count_invalid_timestamps(timestamps) == 2
