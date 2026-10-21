@@ -130,3 +130,35 @@ def test_invalid_existing_schema_triggers_redownload(tmp_path, monkeypatch):
         "2020-01-01T00:00:00Z,5.0\n"
     )
     assert not destination.with_name("data.csv.part").exists()
+
+
+def test_failed_redownload_preserves_existing_file(tmp_path, monkeypatch):
+    destination = tmp_path / "data.csv"
+    original_content = "wrong_column\nold_value\n"
+    destination.write_text(original_content, encoding="utf-8")
+
+    class FakeResponse:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def raise_for_status(self):
+            raise download_data.requests.HTTPError("500 Server Error")
+
+    monkeypatch.setattr(
+        download_data.requests,
+        "get",
+        lambda *args, **kwargs: FakeResponse(),
+    )
+
+    with pytest.raises(download_data.requests.HTTPError):
+        download_data.download(
+            "https://example.com/data.csv",
+            destination,
+            {"utc_timestamp", "DE_temperature"},
+        )
+
+    assert destination.read_text(encoding="utf-8") == original_content
+    assert not destination.with_name("data.csv.part").exists()
