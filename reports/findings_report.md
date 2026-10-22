@@ -64,7 +64,7 @@ The dataset represents a historical snapshot. Weather observations are country-l
 
 - Wednesday had the highest average weekday demand, at approximately **59,449.26 MW**.
 
-- Sunday had the lowest average weekday demand, at approximately **45,808.58 MW**.
+- Sunday had the lowest average demand by day of the week, at approximately **45,808.58 MW**.
 
 
 
