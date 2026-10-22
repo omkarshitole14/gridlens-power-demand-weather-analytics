@@ -1,8 +1,8 @@
-\# GridLens: Power Demand \& Weather Intelligence — Findings Report
+# GridLens: Power Demand & Weather Intelligence — Findings Report
 
 
 
-\## 1. Project overview
+## 1. Project overview
 
 
 
@@ -14,29 +14,29 @@ The objective is to identify observed demand patterns over time, compare demand 
 
 
 
-\## 2. Dataset coverage and quality
+## 2. Dataset coverage and quality
 
 
 
-\- \*\*Geographic scope:\*\* Germany.
+- **Geographic scope:** Germany.
 
-\- \*\*Coverage:\*\* 2014-12-31 23:00 UTC to 2020-09-30 23:00 UTC.
+- **Coverage:** 2014-12-31 23:00 UTC to 2020-09-30 23:00 UTC.
 
-\- \*\*Prepared records:\*\* 50,401 hourly rows.
+- **Prepared records:** 50,401 hourly rows.
 
-\- \*\*Valid electricity-demand observations:\*\* 50,400.
+- **Valid electricity-demand observations:** 50,400.
 
-\- \*\*Missing electricity-demand values:\*\* 1 row.
+- **Missing electricity-demand values:** 1 row.
 
-\- \*\*Missing temperature observations:\*\* 6,576 rows.
+- **Missing temperature observations:** 6,576 rows.
 
-\- \*\*Demand and temperature paired observations:\*\* 43,824 hours.
+- **Demand and temperature paired observations:** 43,824 hours.
 
-\- \*\*Invalid timestamps:\*\* 0.
+- **Invalid timestamps:** 0.
 
-\- \*\*Duplicate timestamps:\*\* 0.
+- **Duplicate timestamps:** 0.
 
-\- \*\*Reported weather match rate:\*\* 87.0%.
+- **Reported weather match rate:** 87.0%.
 
 
 
@@ -48,27 +48,27 @@ The dataset represents a historical snapshot. Weather observations are country-l
 
 
 
-\## 3. Finding 1 — Daily and weekly demand patterns
+## 3. Finding 1 — Daily and weekly demand patterns
 
 
 
-\### Evidence
+### Evidence
 
 
 
-\- Average demand across valid observations was \*\*55,492.47 MW\*\*.
+- Average demand across valid observations was **55,492.47 MW**.
 
-\- Average demand was highest at \*\*11:00\*\*, at approximately \*\*64,033.85 MW\*\*.
+- Average demand was highest at **11:00**, at approximately **64,033.85 MW**.
 
-\- Average demand was lowest at \*\*02:00\*\*, at approximately \*\*43,525.37 MW\*\*.
+- Average demand was lowest at **02:00**, at approximately **43,525.37 MW**.
 
-\- Wednesday had the highest average weekday demand, at approximately \*\*59,449.26 MW\*\*.
+- Wednesday had the highest average weekday demand, at approximately **59,449.26 MW**.
 
-\- Sunday had the lowest average weekday demand, at approximately \*\*45,808.58 MW\*\*.
+- Sunday had the lowest average weekday demand, at approximately **45,808.58 MW**.
 
 
 
-\### Interpretation
+### Interpretation
 
 
 
@@ -76,7 +76,7 @@ The historical data shows a clear variation in average electricity demand across
 
 
 
-\### Possible operational use
+### Possible operational use
 
 
 
@@ -84,7 +84,7 @@ These patterns could help analysts identify periods worth examining for demand p
 
 
 
-\### Limitations
+### Limitations
 
 
 
@@ -92,23 +92,23 @@ These are historical averages, not forecasts. Differences may reflect industrial
 
 
 
-\## 4. Finding 2 — Seasonal patterns and peak demand
+## 4. Finding 2 — Seasonal patterns and peak demand
 
 
 
-\### Evidence
+### Evidence
 
 
 
-\- The maximum recorded demand was \*\*77,549 MW\*\*, observed on \*\*13 December 2017 at 17:00 local time\*\*.
+- The maximum recorded demand was **77,549 MW**, observed on **13 December 2017 at 17:00 local time**.
 
-\- February had the highest average monthly demand, at approximately \*\*59,974.17 MW\*\*.
+- February had the highest average monthly demand, at approximately **59,974.17 MW**.
 
-\- May had the lowest average monthly demand, at approximately \*\*52,284.02 MW\*\*.
+- May had the lowest average monthly demand, at approximately **52,284.02 MW**.
 
 
 
-\### Interpretation
+### Interpretation
 
 
 
@@ -116,7 +116,7 @@ The historical observations show variation in demand across months and a substan
 
 
 
-\### Possible operational use
+### Possible operational use
 
 
 
@@ -124,7 +124,7 @@ Monthly comparisons and peak-period identification could support further investi
 
 
 
-\### Limitations
+### Limitations
 
 
 
@@ -132,29 +132,29 @@ The historical period does not provide equal coverage for every calendar month a
 
 
 
-\## 5. Finding 3 — Relationship between temperature and electricity demand
+## 5. Finding 3 — Relationship between temperature and electricity demand
 
 
 
-\### Evidence
+### Evidence
 
 
 
-\- Paired demand-and-temperature observations: \*\*43,824 hours\*\*.
+- Paired demand-and-temperature observations: **43,824 hours**.
 
-\- Pearson correlation between temperature and demand: \*\*−0.0272\*\*.
+- Pearson correlation between temperature and demand: **−0.0272**.
 
-\- Average demand for observations below 0°C: approximately \*\*57,376.27 MW\*\* across 4,677 paired hours.
+- Average demand for observations below 0°C: approximately **57,376.27 MW** across 4,677 paired hours.
 
-\- Average demand for observations from 0°C to below 10°C: approximately \*\*56,403.45 MW\*\* across 18,464 paired hours.
+- Average demand for observations from 0°C to below 10°C: approximately **56,403.45 MW** across 18,464 paired hours.
 
-\- Average demand for observations from 10°C to below 20°C: approximately \*\*53,654.35 MW\*\* across 15,256 paired hours.
+- Average demand for observations from 10°C to below 20°C: approximately **53,654.35 MW** across 15,256 paired hours.
 
-\- Average demand for observations at or above 20°C: approximately \*\*58,898.99 MW\*\* across 5,427 paired hours.
+- Average demand for observations at or above 20°C: approximately **58,898.99 MW** across 5,427 paired hours.
 
 
 
-\### Interpretation
+### Interpretation
 
 
 
@@ -166,7 +166,7 @@ The temperature-band averages are not uniform: average demand is higher in the b
 
 
 
-\### Limitations
+### Limitations
 
 
 
@@ -174,19 +174,19 @@ Correlation does not establish causation. Temperature bands combine observations
 
 
 
-\## 6. Recommendations
+## 6. Recommendations
 
 
 
-1\. \*\*Investigate demand profiles by hour and weekday.\*\* Use the observed patterns as a starting point for more detailed operational analysis, not as direct evidence of a required operational change.
+1. **Investigate demand profiles by hour and weekday.** Use the observed patterns as a starting point for more detailed operational analysis, not as direct evidence of a required operational change.
 
-2\. \*\*Compare seasonal demand across complete periods.\*\* Use consistent date ranges when assessing whether monthly or seasonal patterns repeat.
+2. **Compare seasonal demand across complete periods.** Use consistent date ranges when assessing whether monthly or seasonal patterns repeat.
 
-3\. \*\*Explore nonlinear weather relationships.\*\* Consider seasonal comparisons and a nonlinear analysis before drawing conclusions about temperature sensitivity.
+3. **Explore nonlinear weather relationships.** Consider seasonal comparisons and a nonlinear analysis before drawing conclusions about temperature sensitivity.
 
-4\. \*\*Improve weather coverage in future analyses.\*\* Obtain and validate appropriate weather observations for missing periods, documenting any changes to the source data.
+4. **Improve weather coverage in future analyses.** Obtain and validate appropriate weather observations for missing periods, documenting any changes to the source data.
 
-5\. \*\*Keep analysis reproducible.\*\* Retain the preparation scripts, SQL queries, automated tests, metric outputs, and Power BI report so the findings can be checked and updated.
+5. **Keep analysis reproducible.** Retain the preparation scripts, SQL queries, automated tests, metric outputs, and Power BI report so the findings can be checked and updated.
 
 
 
@@ -194,7 +194,7 @@ These are proposed analytical next steps. This project has not measured cost sav
 
 
 
-\## 7. Conclusion
+## 7. Conclusion
 
 
 
