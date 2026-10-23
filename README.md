@@ -155,6 +155,15 @@ These comparisons are descriptive. They do not establish a causal relationship b
 
 ## Power BI Dashboard
 
+### Power Demand Intelligence
+
+![GridLens Power Demand Intelligence dashboard](reports/screenshots/power_demand_dashboard.png)
+
+### Weather & Demand Analysis
+
+![GridLens Weather and Demand Analysis dashboard](reports/screenshots/weather_demand_dashboard.png)
+
+
 The Power BI report contains two pages:
 
 1. **GridLens | Power Demand Intelligence** — overview of electricity demand, summary metrics, and time-based demand patterns.
