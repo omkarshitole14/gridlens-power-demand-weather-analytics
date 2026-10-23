@@ -80,6 +80,22 @@ GridLens/
 
 The exact contents of supporting directories may change as the project evolves. Generated datasets and raw source files should be handled according to the repository's Git ignore rules.
 
+## Visualizations
+
+The following charts summarize key patterns identified in the historical electricity demand and weather data.
+
+### Electricity Demand Over Time
+
+![Electricity demand over time](reports/figures/demand_over_time.png)
+
+### Electricity Demand by Hour
+
+![Mean electricity demand by hour](reports/figures/mean_demand_by_hour.png)
+
+### Electricity Demand vs. Temperature
+
+![Electricity demand versus temperature](reports/figures/demand_vs_temperature.png)
+
 ## Key Findings
 
 The prepared dataset contains **50,401 hourly records**, covering 31 December 2014 through 30 September 2020 in UTC.
